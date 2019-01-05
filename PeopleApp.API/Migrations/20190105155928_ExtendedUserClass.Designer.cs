@@ -9,7 +9,7 @@ using PeopleApp.API.Data;
 namespace PeopleApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190105153914_ExtendedUserClass")]
+    [Migration("20190105155928_ExtendedUserClass")]
     partial class ExtendedUserClass
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ namespace PeopleApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<bool>("isMain");
 
@@ -90,9 +90,10 @@ namespace PeopleApp.API.Migrations
 
             modelBuilder.Entity("PeopleApp.API.Models.Photo", b =>
                 {
-                    b.HasOne("PeopleApp.API.Models.User")
+                    b.HasOne("PeopleApp.API.Models.User", "User")
                         .WithMany("Photos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
